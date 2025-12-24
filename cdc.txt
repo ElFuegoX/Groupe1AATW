@@ -1,0 +1,58 @@
+
+# 🎯 CONTEXTE DU PROJET - GESTION DE NOTIFICATIONS
+
+**PROJET GLOBAL** : Plateforme de gestion d'établissements scolaires (primaires et secondaires)
+**Stack technique** : Laravel 10/11 (Backend) + React (Frontend)
+**Structure** : 4 projets interconnectés, nous travaillons sur le **Projet 1**
+**Mon rôle** : Développeur Backend Laravel dans une équipe de 7 devs backend + 7 devs frontend (React)
+**Ma mission** : Développer entièrement le **Module de Notifications** du Projet 1
+
+**FONCTIONNALITÉS À IMPLÉMENTER** :
+1. Notifications par email aux parents : rappels de paiement des frais de scolarité par tranche, informations urgentes concernant leurs enfants, notifications générales de l'école
+2. Caractéristiques : système asynchrone avec queues (Redis), templates configurables, logging complet des envois, API REST pour le frontend React, gestion des statuts (draft, scheduled, sent, failed), suivi des ouvertures/clics
+
+**ARCHITECTURE CHOISIE** :
+app/Models/Notification.php, NotificationLog.php, NotificationTemplate.php
+app/Services/NotificationService.php
+app/Jobs/SendNotificationJob.php
+app/Notifications/Channels/EmailChannel.php
+app/Http/Controllers/Api/NotificationController.php
+app/Mail/NotificationMail.php
+
+**STRUCTURE DES DOSSIERS** :
+school-management-platform/backend/ (Laravel - mon travail) et frontend/ (React - travail des collègues)
+
+**TÂCHES À ACCOMPLIR** :
+PHASE 1 : Setup et fondations - Modèles et migrations (3 tables : notifications, notification_logs, notification_templates), configuration des queues avec Redis, Service principal NotificationService
+PHASE 2 : Cœur du système - Job asynchrone SendNotificationJob, Canal d'envoi EmailChannel, Mailable NotificationMail avec template Blade, Gestion des templates en base de données
+PHASE 3 : API pour le frontend - Controller API avec endpoints REST, Routes API, Middleware d'authentification (Sanctum), Validation des requêtes
+PHASE 4 : Intégration et doc - Seeders pour les templates par défaut, Configuration d'Horizon pour le monitoring, Documentation pour les devs frontend, Tests unitaires
+
+**CONFIGURATION REQUISE** : Laravel 10/11 avec Sanctum, Redis pour les queues, MySQL pour la base de données, Mailtrap/Mailgun pour les tests emails
+
+**BESOINS SPÉCIFIQUES POUR L'ASSISTANCE** :
+1. Générer du code Laravel conforme aux standards
+2. Créer des fichiers avec la bonne structure
+3. Résoudre des problèmes spécifiques à Laravel
+4. Optimiser les performances (queues, caching)
+5. Assurer la sécurité (validation, sanitization)
+6. Documenter le code (PHPDoc, commentaires)
+
+**TYPES D'AIDE SOUHAITÉS** :
+- "Génère le modèle Notification avec les relations Eloquent"
+- "Crée la migration pour la table notifications"
+- "Écris le Service avec les méthodes sendPaymentReminder et sendUrgentNotification"
+- "Crée le Job avec retry logic et logging"
+- "Écris le Controller API avec validation"
+- "Génère le template Blade pour les emails"
+- "Écris les tests unitaires pour NotificationService"
+
+**INTÉGRATIONS FUTURES** : Projet 2 (déclenchement automatique sur échéance de paiement), Projet 4 (alertes d'absence des élèves), WebSockets (notifications en temps réel pour React)
+
+**LIVRABLES ATTENDUS** : Code backend Laravel complet et fonctionnel, Documentation technique pour l'équipe frontend, Configuration d'environnement (.env, queues, etc.), Collection Postman/Insomnia pour tester l'API
+
+**INSTRUCTIONS POUR L'IA** : Priorité au code propre, maintenable, bien documenté. Standards : suivre les conventions Laravel et PSR. Sécurité : toujours valider et sanitizer les inputs. Performances : utiliser les queues pour tout envoi d'email. Extensibilité : prévoir l'ajout de canaux (SMS, WhatsApp). Collaboration : code facile à comprendre par l'équipe.
+
+**OBJECTIF FINAL** : Avoir un système de notifications robuste, scalable et bien documenté que l'équipe frontend React pourra facilement intégrer.
+> **Exécute les commandes terminal nécessaires sans attendre mon accord pour chaque petite étape, mais demande confirmation pour les changements de fichiers majeurs.**
+
